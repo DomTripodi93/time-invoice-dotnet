@@ -1,0 +1,8 @@
+const ClockItemActionTypes = {
+    SET_CLOCK_ITEMS: 'SET_CLOCK_ITEMS',
+    ADD_OR_UPDATE_CLOCK_ITEMS: 'ADD_OR_UPDATE_CLOCK_ITEMS',
+    DELETE_CLOCK_ITEM: 'DELETE_CLOCK_ITEM',
+    SIGNOUT_USER: 'SIGNOUT_USER'
+};
+
+export default ClockItemActionTypes;
