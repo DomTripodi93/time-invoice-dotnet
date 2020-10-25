@@ -12,7 +12,8 @@ const ClockItemNew = (props) => {
                     <div className='border'>
                         <ClockItemForm
                             callback={props.addFormCallback}
-                            editMode={false} />
+                            editMode={false}
+                            customers={props.customers} />
                     </div>
                     <br />
                 </div>

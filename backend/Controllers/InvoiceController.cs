@@ -49,7 +49,7 @@ namespace backend.Controllers
                 return CreatedAtRoute("GetInvoice", new {id = invoice.Id }, invoiceToReturn);
             }
             
-            throw new Exception("Creation of Clock Item failed on save");
+            throw new Exception("Creation of invoice failed on save");
         }
 
 

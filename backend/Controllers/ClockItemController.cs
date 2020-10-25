@@ -46,7 +46,7 @@ namespace backend.Controllers
                 return CreatedAtRoute("GetClockItem", new {id = clockItem.Id }, clockItemToReturn);
             }
             
-            throw new Exception("Creation of Clock Item failed on save");
+            throw new Exception("Creation of clock item failed on save");
         }
 
 

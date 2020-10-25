@@ -37,7 +37,8 @@ const ClockItems = props => {
                                     >
                                 <SingleClockItem
                                     clockItem={clockItem}
-                                    date={props.date} />
+                                    date={props.date}
+                                    customers={props.customers} />
                             </div>
                         ))}
                     </div>

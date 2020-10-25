@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { addClockItem, updateClockItem } from '../../reducers/clock-item/clock-item.actions';
 import CustomButton from '../../shared/elements/button/custom-button.component';
 import FormInput from '../../shared/elements/form-input/form-input.component';
 import helpers from '../../shared/helpers';
+import FormSelect from '../../shared/elements/form-select/form-select.component';
 
 
 const ClockItemForm = props => {
@@ -16,6 +17,22 @@ const ClockItemForm = props => {
         hours: 0,
         invoiced: false
     });
+
+    const [customerOptions, setCustomerOptions] = useState([{ value: "None", label: "None" }])
+
+    const setUpCustomerOptions = useCallback(() => {
+        props.customers.forEach(customer => {
+            setCustomerOptions((customers => {
+                return [...customers, {
+                    value: customer.companyName, label: customer.companyName
+                }]
+            }))
+        })
+    }, [props])
+    
+    useEffect(() => {
+        setUpCustomerOptions();
+    }, [setUpCustomerOptions])
 
     useEffect(() => {
         let effectHelper = new helpers();
@@ -92,10 +109,10 @@ const ClockItemForm = props => {
                     onChange={handleChange}
                     required
                 />
-                <FormInput
+                <FormSelect
                     label='Customer'
-                    type='text'
                     name='customer'
+                    options={customerOptions}
                     value={customer}
                     onChange={handleChange}
                     required

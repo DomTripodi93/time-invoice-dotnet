@@ -35,6 +35,10 @@ const InvoiceForm = props => {
             }))
         })
     }, [props])
+    
+    useEffect(() => {
+        setUpCustomerOptions();
+    }, [setUpCustomerOptions])
 
     useEffect(() => {
         if (props.editMode) {
@@ -45,9 +49,6 @@ const InvoiceForm = props => {
         }
     }, [props])
 
-    useEffect(() => {
-        setUpCustomerOptions();
-    }, [setUpCustomerOptions])
 
     const { date, customer } = invoiceInfo;
     const { startDate, endDate } = dateRage;

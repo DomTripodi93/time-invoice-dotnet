@@ -5,11 +5,13 @@ import ClockItemNew from '../../components/clock-item/clock-item-new';
 import ClockItems from '../../components/clock-item/clock-items';
 
 import "./clock-items.styles.scss";
+import { fetchCustomers } from '../../reducers/customer/customer.actions';
 
 
 const ClockItemContainer = (props) => {
     const thisMonth = new Date().getMonth();
     const thisYear = new Date().getFullYear();
+    const fetchCustomers = props.fetchCustomers;
     const [addMode, setAddMode] = useState(false);
     const fetchClockItems = props.fetchClockItemsByDate;
     const [dateRange, setDateRange] = useState({
@@ -24,6 +26,9 @@ const ClockItemContainer = (props) => {
         }
     }, [fetchClockItems, startDate, endDate]);
 
+    useEffect(()=>{
+        fetchCustomers();
+    }, [fetchCustomers])
 
     const showClockItemForm = () => {
         setAddMode(!addMode)
@@ -38,13 +43,15 @@ const ClockItemContainer = (props) => {
                     addFormCallback={showClockItemForm}
                     dateRangeCallback={setDateRange}
                     startDate={startDate}
-                    endDate={endDate} />
+                    endDate={endDate}
+                    customers={props.customers} />
             </div>
             <br />
             {props.clockItems ?
                 <ClockItems
                     action={showClockItemForm}
-                    clockItems={props.clockItems} />
+                    clockItems={props.clockItems}
+                    customers={props.customers} />
                 :
                 null
             }
@@ -56,12 +63,14 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchClockItemsByDate: (startDate, endDate) => dispatch(fetchClockItemsByDate(startDate, endDate)),
         fetchClockItemsInvoiced: (startDate, endDate, invoiced) => 
-            dispatch(fetchClockItemsByDateAndInvoiced(startDate, endDate, invoiced))
+            dispatch(fetchClockItemsByDateAndInvoiced(startDate, endDate, invoiced)),
+        fetchCustomers: () => dispatch(fetchCustomers())
     }
 }
 
 const mapStateToProps = state => ({
-    clockItems: state.clockItem.clockItems
+    clockItems: state.clockItem.clockItems,
+    customers: state.customer.customers
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClockItemContainer);

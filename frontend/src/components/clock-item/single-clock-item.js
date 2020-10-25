@@ -80,7 +80,8 @@ const SingleClockItem = props => {
                 <ClockItemForm
                     editMode={true}
                     clockItemInput={props.clockItem}
-                    callback={setEditMode} />
+                    callback={setEditMode}
+                    customers={props.customers} />
             }
         </div>
     )
