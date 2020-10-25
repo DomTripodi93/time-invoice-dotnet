@@ -1,4 +1,7 @@
 using System.Data;
+using System.Threading.Tasks;
+using System.Linq;
+using backend.Models;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -12,11 +15,11 @@ namespace backend.Data
         {
             _config = config;
         }
-        public void ExecuteProcedure(string sql)
+        public async Task<T> ExecuteProcedure<T>(string sql)
         {
             using (IDbConnection dbConnection = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
-                dbConnection.Execute(sql);
+                return await dbConnection.QueryFirstOrDefaultAsync<T>(sql);
             }
         }
     }

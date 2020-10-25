@@ -59,12 +59,45 @@ namespace backend.Data
 
         public async Task<ClockItem> GetSingleClockItem(int userId, int id)
         {
-            ClockItem clockItems = await _context.ClockItems
+            ClockItem clockItem = await _context.ClockItems
                 .Where(c => c.userId == userId)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
             
-            return clockItems;
+            return clockItem;
+        }
+
+        public async Task<IEnumerable<Invoice>> GetInvoicesForPeriod(DateTime startDate, DateTime endDate, int userId)
+        {
+            IEnumerable<Invoice> invoices = await _context.Invoices
+                .Where(c => c.userId == userId)
+                .Where(c => c.Date > startDate)
+                .Where(c => c.Date < endDate)
+                .ToListAsync();
+            
+            return invoices;
+        }
+
+        public async Task<IEnumerable<Invoice>> GetInvoicesForPeriodAndPaid(DateTime startDate, DateTime endDate, Boolean paid, int userId)
+        {
+            IEnumerable<Invoice> invoices = await _context.Invoices
+                .Where(c => c.userId == userId)
+                .Where(c => c.Date > startDate)
+                .Where(c => c.Date < endDate)
+                .Where(c => c.Paid == paid)
+                .ToListAsync();
+            
+            return invoices;
+        }
+
+        public async Task<Invoice> GetSingleInvoice(int userId, int id)
+        {
+            Invoice invoice = await _context.Invoices
+                .Where(c => c.userId == userId)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+            
+            return invoice;
         }
     }
 }
