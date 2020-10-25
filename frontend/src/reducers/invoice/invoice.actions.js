@@ -34,7 +34,7 @@ export function addInvoice(invoice, dates, callback) {
 export function updateInvoice(invoice, dates, callback) {
     invoice = prepInvoiceValues(invoice);
     return dispatch => {
-        http.updateItemById("invoice/" + dates.startDate + "/" + dates.endDate, invoice, invoice._id)
+        http.updateItemById("invoice/" + dates.startDate + "/" + dates.endDate, invoice, invoice.id)
             .then((updatedInvoice) => {
                 dispatch(addOrUpdateInvoiceInState(updatedInvoice.data));
                 callback();

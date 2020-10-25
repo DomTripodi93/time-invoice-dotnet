@@ -42,7 +42,7 @@ export function addClockItem(clockItem, callback) {
 export function updateClockItem(clockItem, callback) {
     clockItem = prepClockItemValues(clockItem);
     return dispatch => {
-        http.updateItemById("clockItem", clockItem, clockItem._id)
+        http.updateItemById("clockItem", clockItem, clockItem.id)
             .then((updatedClockItem) => {
                 dispatch(addOrUpdateClockItemInState(updatedClockItem.data, updatedClockItem.data.startTime.substring(0,10)));
                 callback();

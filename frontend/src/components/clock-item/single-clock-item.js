@@ -18,7 +18,7 @@ const SingleClockItem = props => {
             "Are you sure you want to delete this clockItem ?" 
         )) {
             props.deleteClockItem(
-                props.clockItem._id,
+                props.clockItem.id,
                 props.clockItem.date.split("T")[0]
             );
         }

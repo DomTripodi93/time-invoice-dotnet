@@ -24,7 +24,7 @@ const Customers = props => {
                     </div>
                     <div className='grid100'>
                         {props.customers.map(customer => (
-                            <div key={customer._id}>
+                            <div key={customer.id}>
                                 <Customer
                                     action={props.showCustomerForm}
                                     customer={customer}

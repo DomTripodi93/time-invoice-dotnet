@@ -16,7 +16,7 @@ const SingleCustomer = props => {
             "Are you sure you want to delete this customer" + props.customer.companyName + "?" 
         )) {
             props.deleteCustomer(
-                props.customer._id
+                props.customer.id
             );
         }
     }

@@ -30,7 +30,7 @@ const Invoices = props => {
                     </div>
                     <div className='grid100'>
                         {props.invoices.map(invoice => (
-                            <div key={invoice._id}>
+                            <div key={invoice.id}>
                                 <Invoice
                                     action={props.showInvoiceForm}
                                     invoice={invoice}

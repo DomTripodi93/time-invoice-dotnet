@@ -18,7 +18,7 @@ const SingleInvoice = props => {
             "Are you sure you want to delete this invoice ?" 
         )) {
             props.deleteInvoice(
-                props.invoice._id
+                props.invoice.id
             );
         }
     }

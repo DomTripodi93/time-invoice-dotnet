@@ -23,7 +23,7 @@ const customerReducer = (state = INITIAL_STATE, action) => {
                 action.payload,
                 ...customersHold
                     .filter((value) => {
-                        return value._id !== action.payload._id
+                        return value.id !== action.payload.id
                     })]
                 .sort((first, second) => {
                     if (first.companyName < second.companyName) {
@@ -40,7 +40,7 @@ const customerReducer = (state = INITIAL_STATE, action) => {
             customersHold = [
                 ...customersHold
                     .filter((value) => {
-                        return value._id !== action.payload
+                        return value.id !== action.payload
                     })]
             return {
                 ...state,

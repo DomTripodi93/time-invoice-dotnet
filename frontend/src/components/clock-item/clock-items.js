@@ -6,7 +6,7 @@ const ClockItems = props => {
         <div className='grid100'>
             {props.clockItems.map(clockItem => (
                 <div
-                    key={clockItem._id}
+                    key={clockItem.id}
                     className="grid-line"
                         >
                     <SingleClockItem

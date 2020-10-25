@@ -18,7 +18,7 @@ const clockItemReducer = (state = INITIAL_STATE, action) => {
                     action.payload,
                     ...clockItemsHold[action.date]
                         .filter((value) => {
-                            return value._id !== action.payload._id
+                            return value.id !== action.payload.id
                         })]
                     .sort((first, second) => {
                         if (first.startTime < second.startTime) {
@@ -36,7 +36,7 @@ const clockItemReducer = (state = INITIAL_STATE, action) => {
             clockItemsHold[action.date] = [
                 ...clockItemsHold[action.date]
                     .filter((value) => {
-                        return value._id !== action.payload
+                        return value.id !== action.payload
                     })]
             return {
                 ...state,

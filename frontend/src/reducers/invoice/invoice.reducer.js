@@ -19,7 +19,7 @@ const invoiceReducer = (state = INITIAL_STATE, action) => {
                     action.payload,
                     ...invoicesHold
                         .filter((value) => {
-                            return value._id !== action.payload._id
+                            return value.id !== action.payload.id
                         })]
                     .sort((first, second) => {
                         if (first.invoiceNumber > second.invoiceNumber) {
@@ -37,7 +37,7 @@ const invoiceReducer = (state = INITIAL_STATE, action) => {
             invoicesHold = [
                 ...invoicesHold
                     .filter((value) => {
-                        return value._id !== action.payload
+                        return value.id !== action.payload
                     })]
             return {
                 ...state,

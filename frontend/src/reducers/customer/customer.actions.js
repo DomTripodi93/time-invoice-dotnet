@@ -42,7 +42,7 @@ export function addCustomer(customer, callback) {
 export function updateCustomer(customer, callback) {
     customer = prepCustomerValues(customer);
     return dispatch => {
-        http.updateItemById("customer", customer, customer._id)
+        http.updateItemById("customer", customer, customer.id)
             .then((updatedCustomer) => {
                 dispatch(addOrUpdateCustomerInState(updatedCustomer.data));
                 callback();

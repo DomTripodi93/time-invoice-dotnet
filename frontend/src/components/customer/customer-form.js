@@ -37,7 +37,7 @@ const CustomerForm = props => {
     const setUpGroupOptions = useCallback(() => {
         if (props.editMode){
             props.customerGroups.forEach(group => {
-                if (group.companyName != props.customerInput.companyName){
+                if (group.companyName !== props.customerInput.companyName){
                     setGroupOptions((groups => { return [...groups, { 
                         value: group.companyName, label: group.companyName
                     }]}))
