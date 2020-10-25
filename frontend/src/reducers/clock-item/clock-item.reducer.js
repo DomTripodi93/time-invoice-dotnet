@@ -1,11 +1,11 @@
 import ClockItemActionTypes from './clock-item.types';
 
 const INITIAL_STATE = {
-    clockItems: {}
+    clockItems: []
 }
 
 const clockItemReducer = (state = INITIAL_STATE, action) => {
-    let clockItemsHold = {...state.clockItems}
+    let clockItemsHold = [...state.clockItems]
     switch (action.type) {
         case ClockItemActionTypes.SET_CLOCK_ITEMS:
             return {
@@ -13,28 +13,26 @@ const clockItemReducer = (state = INITIAL_STATE, action) => {
                 clockItems: action.payload.data
             };
         case ClockItemActionTypes.ADD_OR_UPDATE_CLOCK_ITEMS:
-            if (clockItemsHold[action.date]){
-                clockItemsHold[action.date] = [
-                    action.payload,
-                    ...clockItemsHold[action.date]
-                        .filter((value) => {
-                            return value.id !== action.payload.id
-                        })]
-                    .sort((first, second) => {
-                        if (first.startTime < second.startTime) {
-                            return -1
-                        } else {
-                            return 1
-                        }
-                    })
-            }
+            clockItemsHold = [
+                action.payload,
+                ...clockItemsHold
+                    .filter((value) => {
+                        return value.id !== action.payload.id
+                    })]
+                .sort((first, second) => {
+                    if (first.startTime < second.startTime) {
+                        return -1
+                    } else {
+                        return 1
+                    }
+                })
             return {
                 ...state,
                 clockItems: clockItemsHold
             };
         case ClockItemActionTypes.DELETE_CLOCK_ITEM:
-            clockItemsHold[action.date] = [
-                ...clockItemsHold[action.date]
+            clockItemsHold = [
+                ...clockItemsHold
                     .filter((value) => {
                         return value.id !== action.payload
                     })]
@@ -44,7 +42,7 @@ const clockItemReducer = (state = INITIAL_STATE, action) => {
             };
         case ClockItemActionTypes.SIGNOUT_USER:
             return {
-                clockItems: {}
+                clockItems: []
             };
         default:
             return state;

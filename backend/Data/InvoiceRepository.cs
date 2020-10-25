@@ -45,6 +45,18 @@ namespace backend.Data
             return clockItems;
         }
 
+        public async Task<IEnumerable<ClockItem>> GetClockItemsForPeriodAndInvoiced(DateTime startTime, DateTime endTime, Boolean invoiced, int userId)
+        {
+            IEnumerable<ClockItem> clockItems = await _context.ClockItems
+                .Where(c => c.userId == userId)
+                .Where(c => c.StartTime > startTime)
+                .Where(c => c.StartTime < endTime)
+                .Where(c => c.Invoiced == invoiced)
+                .ToListAsync();
+            
+            return clockItems;
+        }
+
         public async Task<ClockItem> GetSingleClockItem(int userId, int id)
         {
             ClockItem clockItems = await _context.ClockItems

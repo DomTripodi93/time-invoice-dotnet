@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using backend.Dtos;
 using backend.Models;
@@ -11,6 +12,8 @@ namespace backend.Helpers
             CreateMap<User, UserForReturnDto>();
             CreateMap<SettingsForCreationDto, Settings>().ReverseMap();
             CreateMap<SettingsForReturnDto, Settings>().ReverseMap();
+            CreateMap<ClockItemForCreationDto, ClockItem>().ReverseMap();
+            CreateMap<ClockItem, ClockItemForReturnDto>();
         }
     }
 }

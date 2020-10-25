@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchClockItemsByDate, fetchClockItemsByDateAndInvoiced } from '../../reducers/clock-item/clock-item.actions';
 import ClockItemNew from '../../components/clock-item/clock-item-new';
-import ClockItemDates from '../../components/clock-item/clock-item-dates';
+import ClockItems from '../../components/clock-item/clock-items';
 
 import "./clock-items.styles.scss";
 
@@ -42,7 +42,7 @@ const ClockItemContainer = (props) => {
             </div>
             <br />
             {props.clockItems ?
-                <ClockItemDates
+                <ClockItems
                     action={showClockItemForm}
                     clockItems={props.clockItems} />
                 :

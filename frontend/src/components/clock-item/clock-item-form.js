@@ -18,15 +18,16 @@ const ClockItemForm = props => {
     });
 
     useEffect(() => {
+        let effectHelper = new helpers();
         if (props.editMode) {
             setClockItemInfo({
                 ...props.clockItemInput,
                 date: props.clockItemInput.date.split('T')[0],
-                startTime: helper.timeFromDate(props.clockItemInput.startTime),
-                endTime: helper.timeFromDate(props.clockItemInput.endTime)
+                startTime: effectHelper.timeFromDate(props.clockItemInput.startTime),
+                endTime: effectHelper.timeFromDate(props.clockItemInput.endTime)
             });
         }
-    }, [props, helper])
+    }, [props])
 
     const { date, startTime, endTime, customer } = clockItemInfo;
 
