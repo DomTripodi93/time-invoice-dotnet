@@ -76,8 +76,15 @@ const InvoiceForm = props => {
 
     const handleDateRangeChange = event => {
         const { name, value } = event.target;
-
-        setDateRange({ ...dateRage, [name]: value });
+        if (name === "startDate"){
+            if (value < dateRage.endDate){
+                setDateRange({ ...dateRage, [name]: value });
+            }
+        } else {
+            if (value > dateRage.startDate){
+                setDateRange({ ...dateRage, [name]: value });
+            }
+        }
     };
 
     return (
