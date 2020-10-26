@@ -69,6 +69,15 @@ class helpers {
         return hour + ":" + minute;
     }
 
+    getYesterdayDate() {
+        let baseDate = new Date();
+        const timeZoneOffset = baseDate.getTimezoneOffset() * 60000;
+        baseDate.setDate(baseDate.getDate() - 1)
+        let date = new Date(baseDate - timeZoneOffset)
+            .toISOString().slice(0, 10);
+        return date;
+    }
+
     getCurrentDate() {
         const timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
         let date = new Date(new Date() - timeZoneOffset)

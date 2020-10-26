@@ -20,7 +20,7 @@ export function fetchInvoicesByDate(startDate, endDate) {
 export function addInvoice(invoice, dates, callback) {
     invoice = prepInvoiceValues(invoice);
     return dispatch => {
-        http.addItem("invoice/" + dates.startDate + "/" + dates.endDate, invoice)
+        http.addItem("invoice/" + dates.startDate + "/" + dates.endDate + "T23:59:59", invoice)
             .then(addedInvoice => {
                 dispatch(addOrUpdateInvoiceInState(
                     addedInvoice.data
@@ -34,7 +34,7 @@ export function addInvoice(invoice, dates, callback) {
 export function updateInvoice(invoice, dates, callback) {
     invoice = prepInvoiceValues(invoice);
     return dispatch => {
-        http.updateItemById("invoice/" + dates.startDate + "/" + dates.endDate, invoice, invoice.id)
+        http.updateItemById("invoice/" + dates.startDate + "/" + dates.endDate + "T23:59:59", invoice, invoice.id)
             .then((updatedInvoice) => {
                 dispatch(addOrUpdateInvoiceInState(updatedInvoice.data));
                 callback();

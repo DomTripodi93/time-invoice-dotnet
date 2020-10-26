@@ -20,7 +20,7 @@ const InvoiceForm = props => {
     });
 
     const [dateRage, setDateRange] = useState({
-        startDate: helper.getCurrentDate(),
+        startDate: helper.getYesterdayDate(),
         endDate: helper.getCurrentDate()
     })
 
