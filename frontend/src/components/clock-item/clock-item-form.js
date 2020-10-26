@@ -18,6 +18,8 @@ const ClockItemForm = props => {
         invoiced: false
     });
 
+    const [invalidState, setInvalidState] = useState(true);
+
     const [customerOptions, setCustomerOptions] = useState([{ value: "None", label: "None" }])
 
     const setUpCustomerOptions = useCallback(() => {
@@ -72,6 +74,12 @@ const ClockItemForm = props => {
     const handleChange = event => {
         const { name, value } = event.target;
 
+        if (name === "customer" & value !== "None"){
+            setInvalidState(false);
+        } else if (name === "customer" & value === "None"){
+            setInvalidState(true);
+        }
+        
         setClockItemInfo({ ...clockItemInfo, [name]: value });
     };
 
@@ -120,12 +128,14 @@ const ClockItemForm = props => {
                 <div className="grid50">
                     {!props.editMode ?
                         <CustomButton
+                            inactive={invalidState}
                             buttonStyle="blue"
                             type="submit"
                             label="Add"
                         />
                         :
                         <CustomButton
+                            inactive={invalidState}
                             buttonStyle="blue"
                             type="submit"
                             label="Update"

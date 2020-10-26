@@ -19,6 +19,8 @@ const InvoiceForm = props => {
         dateRange: ""
     });
 
+    const [invalidState, setInvalidState] = useState(true);
+
     const [dateRage, setDateRange] = useState({
         startDate: helper.getYesterdayDate(),
         endDate: helper.getCurrentDate()
@@ -70,6 +72,12 @@ const InvoiceForm = props => {
 
     const handleInvoiceChange = event => {
         const { name, value } = event.target;
+
+        if (name === "customer" & value !== "None"){
+            setInvalidState(false);
+        } else if (name === "customer" & value === "None"){
+            setInvalidState(true);
+        }
 
         setInvoiceInfo({ ...invoiceInfo, [name]: value });
     };
@@ -132,12 +140,14 @@ const InvoiceForm = props => {
                 <div className="grid50">
                     {!props.editMode ?
                         <CustomButton
+                            inactive={invalidState}
                             buttonStyle="blue"
                             type="submit"
                             label="Add"
                         />
                         :
                         <CustomButton
+                            inactive={invalidState}
                             buttonStyle="blue"
                             type="submit"
                             label="Update"
