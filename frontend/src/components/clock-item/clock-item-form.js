@@ -13,7 +13,7 @@ const ClockItemForm = props => {
         date: helper.getCurrentDate(),
         startTime: helper.getCurrentTime(),
         endTime: helper.getCurrentTime(),
-        customer: "",
+        customer: "None",
         hours: 0,
         invoiced: false
     });

@@ -33,22 +33,21 @@ namespace backend.Controllers
 
 
         [HttpPost("{startDate}/{endDate}")]
-        public async Task<IActionResult> AddInvoice(DateTime startDate, DateTime endDate, InvoiceForCreationDto invoiceForCreation)
+        public async Task<IActionResult> AddInvoice(string startDate, string endDate, InvoiceForCreationDto invoiceForCreation)
         {
-            User creator = await _userRepo.GetUser(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            string sql = $"EXEC dbo.spUpdateClockItemsInvoiced @Invoiced=1 @Customer={invoiceForCreation.Customer} " + 
-                    $"@InvoiceNumber={invoiceForCreation.InvoiceNumber} @StartDate={startDate} @EndDate={endDate} " + 
-                    $"@DateRange={invoiceForCreation.DateRange} @UserId={creator.Id}";
+            string sql = $"EXEC dbo.spUpdateClockItemsInvoiced @Invoiced=1, @Date='{invoiceForCreation.Date}', @Customer='{invoiceForCreation.Customer}', " + 
+                    $"@InvoiceNumber={invoiceForCreation.InvoiceNumber}, @StartDate='{startDate}', @EndDate='{endDate}', " + 
+                    $"@DateRange='{invoiceForCreation.DateRange}', @UserId={userId}";
+
+            Console.WriteLine(sql);
 
             Invoice invoice = await _sqlAccess.ExecuteProcedure<Invoice>(sql);
 
-            if (await _repo.SaveAll())
-            {
-                InvoiceForReturnDto invoiceToReturn = _mapper.Map<InvoiceForReturnDto>(invoice);
-                return CreatedAtRoute("GetInvoice", new {id = invoice.Id }, invoiceToReturn);
-            }
-            
+            InvoiceForReturnDto invoiceToReturn = _mapper.Map<InvoiceForReturnDto>(invoice);
+            return CreatedAtRoute("GetInvoice", new {id = invoice.Id }, invoiceToReturn);
+
             throw new Exception("Creation of invoice failed on save");
         }
 
@@ -91,35 +90,40 @@ namespace backend.Controllers
             return Ok(invoicesForReturn);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDepartment(int id, InvoiceForCreationDto invoiceForCreationDto)
+        [HttpPut("{startDate}/{endDate}/{id}")]
+        public async Task<IActionResult> UpdateDepartment(DateTime startDate, DateTime endDate, int id, InvoiceForCreationDto invoiceForCreationDto)
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            Invoice invoiceFromRepo = await _repo.GetSingleInvoice(userId, id);
+            string sql = $"EXEC dbo.spUpdateInvoice @Date='{invoiceForCreationDto.Date}', @Customer='{invoiceForCreationDto.Customer}', " + 
+                    $"@InvoiceNumber={invoiceForCreationDto.InvoiceNumber}, @StartDate='{startDate}', @EndDate='{endDate}', " + 
+                    $"@DateRange='{invoiceForCreationDto.DateRange}', @UserId={userId}";
 
-            _mapper.Map(invoiceForCreationDto, invoiceFromRepo);
+            Invoice invoice = await _sqlAccess.ExecuteProcedure<Invoice>(sql);
 
             if (await _repo.SaveAll())
             {
-                var invoiceToReturn = _mapper.Map<InvoiceForReturnDto>(invoiceFromRepo);
-                return CreatedAtRoute("GetInvoice", new {id = invoiceFromRepo.Id }, invoiceToReturn);
+                var invoiceToReturn = _mapper.Map<InvoiceForReturnDto>(invoice);
+                return CreatedAtRoute("GetInvoice", new {id = invoice.Id }, invoiceToReturn);
             }
 
             throw new Exception("Updating invoice failed on save");
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDepartment(int id)
+        [HttpDelete("{startDate}/{endDate}/{id}")]
+        public async Task<IActionResult> DeleteDepartment(DateTime startDate, DateTime endDate, int id)
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             
             Invoice invoiceFromRepo = await _repo.GetSingleInvoice(userId, id);
+
+            string sql = $"EXEC dbo.spUpdateClockItemsInvoiced @Invoiced=0, @Date='{invoiceFromRepo.Date}', @Customer='{invoiceFromRepo.Customer}', " + 
+                    $"@InvoiceNumber={invoiceFromRepo.InvoiceNumber}, @StartDate='{startDate}', @EndDate='{endDate}', " + 
+                    $"@DateRange='{invoiceFromRepo.DateRange}', @UserId={userId}";
+
+            Invoice invoice = await _sqlAccess.ExecuteProcedure<Invoice>(sql);
             
-            _repo.Delete(invoiceFromRepo);
-            
-            if (await _repo.SaveAll())
-                return Ok("Invoice was deleted!");
+            return Ok("Invoice was deleted!");
         
             throw new Exception("Deleting invoice failed on save");
         }
