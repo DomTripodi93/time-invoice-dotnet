@@ -67,28 +67,6 @@ namespace backend.Data
             return user;
         }
 
-        public async Task<User> RegisterEmployee(User user, string password, int rootId)
-        {
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
-
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            SettingsForCreationDto settingsForCreation = new SettingsForCreationDto{
-                IsNew = true
-            };
-
-            Settings settings = _mapper.Map<Settings>(settingsForCreation);
-
-            user.Settings = settings;
-
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-
-            return user;
-        }
-
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())

@@ -11,7 +11,8 @@ namespace backend.Helpers
         {
             CreateMap<User, UserForReturnDto>();
             CreateMap<SettingsForCreationDto, Settings>().ReverseMap();
-            CreateMap<SettingsForReturnDto, Settings>().ReverseMap();
+            CreateMap<Settings, SettingsForReturnDto>();
+            CreateMap<SettingsForUpdateDto, Settings>().ReverseMap();
             CreateMap<ClockItemForCreationDto, ClockItem>().ReverseMap();
             CreateMap<ClockItem, ClockItemForReturnDto>();
             CreateMap<Invoice, InvoiceForReturnDto>();

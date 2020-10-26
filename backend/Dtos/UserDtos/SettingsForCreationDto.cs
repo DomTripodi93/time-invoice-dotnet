@@ -3,7 +3,6 @@ namespace backend.Dtos
     public class SettingsForCreationDto
     {
         public int userId { get; set; }
-        public bool IsNew { get; set; }
         public int LastInvoiceNumber { get; set; }
         public string DefaultPointOfContact { get; set; }
         public string DefaultEmail { get; set; }

@@ -13,7 +13,7 @@ const InvoiceForm = props => {
     const [invoiceInfo, setInvoiceInfo] = useState({
         invoiceNumber: props.invoiceNumber,
         date: helper.getCurrentDate(),
-        customer: "",
+        customer: "None",
         hours: 0,
         paid: false,
         dateRange: ""
@@ -35,7 +35,7 @@ const InvoiceForm = props => {
             }))
         })
     }, [props])
-    
+
     useEffect(() => {
         setUpCustomerOptions();
     }, [setUpCustomerOptions])
@@ -65,7 +65,6 @@ const InvoiceForm = props => {
             }
         } else {
             props.addInvoice(invoice, dateRage, props.callback);
-            props.updateSettings({ lastInvoiceNumber: props.invoiceNumber })
         }
     };
 

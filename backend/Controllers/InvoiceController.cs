@@ -70,6 +70,9 @@ namespace backend.Controllers
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
+            Console.WriteLine(startTime);
+            Console.WriteLine(endTime);
+
             IEnumerable<Invoice> invoices = await _repo.GetInvoicesForPeriod(startTime, endTime, userId);
 
             IEnumerable<InvoiceForReturnDto> invoicesForReturn = _mapper.Map<IEnumerable<InvoiceForReturnDto>>(invoices);
@@ -91,7 +94,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("{startDate}/{endDate}/{id}")]
-        public async Task<IActionResult> UpdateDepartment(DateTime startDate, DateTime endDate, int id, InvoiceForCreationDto invoiceForCreationDto)
+        public async Task<IActionResult> UpdateDepartment(string startDate, string endDate, int id, InvoiceForCreationDto invoiceForCreationDto)
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -110,15 +113,15 @@ namespace backend.Controllers
             throw new Exception("Updating invoice failed on save");
         }
 
-        [HttpDelete("{startDate}/{endDate}/{id}")]
-        public async Task<IActionResult> DeleteDepartment(DateTime startDate, DateTime endDate, int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDepartment(int id)
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             
             Invoice invoiceFromRepo = await _repo.GetSingleInvoice(userId, id);
 
             string sql = $"EXEC dbo.spUpdateClockItemsInvoiced @Invoiced=0, @Date='{invoiceFromRepo.Date}', @Customer='{invoiceFromRepo.Customer}', " + 
-                    $"@InvoiceNumber={invoiceFromRepo.InvoiceNumber}, @StartDate='{startDate}', @EndDate='{endDate}', " + 
+                    $"@InvoiceNumber={invoiceFromRepo.InvoiceNumber}, @StartDate='1900-01-01', @EndDate='1900-01-01', " + 
                     $"@DateRange='{invoiceFromRepo.DateRange}', @UserId={userId}";
 
             Invoice invoice = await _sqlAccess.ExecuteProcedure<Invoice>(sql);

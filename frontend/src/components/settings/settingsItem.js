@@ -11,21 +11,14 @@ import '../../containers/invoice/invoice.styles.scss';
 const SettingsItem = (props) => {
     const setting = props.setting[props.keyVal];
     const [addMode, setAddMode] = useState(false);
-    const [settingsInfo, setSettings] = useState({[props.keyVal]: null, ...props.setting})
+    const submitSettingsForUpdate = () => {
+        props.submitSettingsForUpdate();
+        showSettingForm();
+    }
+    const handleChange = props.handleChange;
 
     const showSettingForm = () => {
         setAddMode(!addMode);
-    }
-
-    const handleChange = event => {
-        const { name, value } = event.target;
-
-        setSettings({[name]: value });
-    };
-
-    const submitSettingsForUpdate = () => {
-        props.updateSettings(settingsInfo);
-        setAddMode(false);
     }
 
     return (
@@ -42,7 +35,7 @@ const SettingsItem = (props) => {
                                 label={props.title}
                                 type='text'
                                 name={props.keyVal}
-                                value={settingsInfo[props.keyVal]}
+                                value={setting}
                                 onChange={handleChange} />
                         </form>
                     </div>
@@ -86,12 +79,5 @@ const SettingsItem = (props) => {
     )
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        updateSettings: (settings) => {
-            dispatch(updateSettings(settings))
-        }
-    }
-}
 
-export default connect(null, mapDispatchToProps)(SettingsItem);
+export default SettingsItem;

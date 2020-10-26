@@ -6,7 +6,6 @@ namespace backend.Data
     public interface IAuthRepository
     {
          Task<User> Register(User user, string password);
-         Task<User> RegisterEmployee(User user, string password, int rootId);
          Task<User> Login(string email, string password);
          Task<bool> UserExists(string email);
     }

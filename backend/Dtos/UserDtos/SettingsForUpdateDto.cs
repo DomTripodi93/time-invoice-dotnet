@@ -1,6 +1,6 @@
 namespace backend.Dtos
 {
-    public class SettingsForReturnDto
+    public class SettingsForUpdateDto
     {
         public int LastInvoiceNumber { get; set; }
         public string DefaultPointOfContact { get; set; }

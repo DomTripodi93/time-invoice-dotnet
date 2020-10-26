@@ -1,3 +1,4 @@
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -24,7 +25,7 @@ namespace backend.Controllers
         }
 
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetUser()
         {
             int id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -36,6 +37,25 @@ namespace backend.Controllers
             returnUser.Settings = _mapper.Map<SettingsForReturnDto>(userSettings);
 
             return Ok(returnUser);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateSettings(SettingsForUpdateDto settingsForCreation)
+        {
+            int id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var userSettings = await _repo.GetUserSettings(id);
+
+            _mapper.Map(settingsForCreation, userSettings);
+
+            if (await _repo.SaveAll())
+            {
+                var settingsForReturn = _mapper.Map<SettingsForReturnDto>(userSettings);
+                return Ok(settingsForReturn);
+            }
+
+            throw new Exception("Updating clock item failed on save");
+
         }
 
     }
