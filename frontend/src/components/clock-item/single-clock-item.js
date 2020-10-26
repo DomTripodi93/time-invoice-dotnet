@@ -33,7 +33,7 @@ const SingleClockItem = props => {
                     </div>
                     <div className="inner-border-left">
                         {props.clockItem.customer ?
-                            <h5>{props.clockItem.customer}</h5>
+                            <h5 className="customer">{props.clockItem.customer}</h5>
                             :
                             null
                         }

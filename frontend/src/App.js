@@ -14,7 +14,6 @@ const Home = lazy(() => import('./containers/home/home'));
 const Register = lazy(() => import('./containers/registration/registration'));
 const Signin = lazy(() => import('./containers/registration/signin'));
 const Signout = lazy(() => import('./containers/registration/signout'));
-const CalendarContainer = lazy(() => import('./containers/calendar/calendar.container'));
 const ClockItemContainer = lazy(() => import('./containers/clock-item/clockItem.container'));
 const SettingsContainer = lazy(() => import('./containers/settings/settings.container'));
 const CustomerContainer = lazy(() => import('./containers/customer/customer.container'));
@@ -40,7 +39,6 @@ const App = (props) => {
         <Suspense fallback={<Loading />}>
           <Switch>
             <Route exact path='/' component={ClockItemContainer} />
-            <Route exact path='/calendar' component={CalendarContainer} />
             <Route exact path='/invoice' component={InvoiceContainer} />
             <Route exact path='/settings' component={SettingsContainer} />
             <Route exact path='/customer' component={CustomerContainer} />

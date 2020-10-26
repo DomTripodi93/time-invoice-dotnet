@@ -3,6 +3,8 @@ h4 {
 }
 
 h5{
+    margin-top: 12px;
+    margin-bottom: 10px;
     font-size: 14px;
     @media only screen and (max-width: 700px) {
         font-size: 12px;
@@ -19,6 +21,13 @@ h5{
     grid-template-columns: 22% 16% 13.25% 13.25% 10.5% 12% 13%;
 }
 
+
+.customer{
+    margin-bottom: 0;
+    @media only screen and (max-width: 700px) {
+        margin-top: 6px;
+    }
+}
 
 .grid-line {
     margin-top: none;

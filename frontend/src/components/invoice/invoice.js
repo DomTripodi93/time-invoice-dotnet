@@ -39,7 +39,7 @@ const SingleInvoice = props => {
                     </div>
                     <div className="inner-border-left">
                         {props.invoice.customer ?
-                            <h5>{props.invoice.customer}</h5>
+                            <h5 className="customer">{props.invoice.customer}</h5>
                             :
                             null
                         }
