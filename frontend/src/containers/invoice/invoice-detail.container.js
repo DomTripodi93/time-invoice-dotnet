@@ -22,10 +22,11 @@ const InvoiceContainer = (props) => {
     return (
         <div className="size-holder middle">
             {props.customer.companyName & props.invoice.customer ?
-                <div className="grid100">
+                <div>
                     <InvoiceDetail
                         invoice={props.invoice}
-                        customers={props.customer} />
+                        customers={props.customer}
+                        user={props.user} />
                 </div>
                 :
                 null
@@ -44,7 +45,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => ({
     invoices: state.invoice.selectedInvoice,
-    customers: state.customer.selectedCustomer
+    customers: state.customer.selectedCustomer,
+    user: state.user.settings
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InvoiceContainer);

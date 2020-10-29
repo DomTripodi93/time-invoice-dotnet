@@ -38,6 +38,26 @@ h5{
     grid-template-columns: 12% 17% 13.25% 13.25% 10.5% 12% 21%;
 }
 
+.invoice-detail-companies-grid {
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+}
+
+.invoice-small-detail-grid {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.invoice-detail-grid {
+    display: grid;
+    grid-template-columns: 14% 21% 21% 13% 13% 18%;
+}
+
+.invoice-total-grid {
+    display: grid;
+    grid-template-columns: 65% 17% 18%;
+}
+
 
 .grid-line {
     margin-top: none;
@@ -89,6 +109,16 @@ h5{
     border-color: black;
     background-color: rgb(235, 206, 255);
     border-width: 2px;
+    text-align: center;
+}
+
+.inner-border-full-header {
+    height: 100%;
+    width: 100%;
+    border-style: solid;
+    border-color: black;
+    background-color: rgb(143, 145, 196);
+    border-width: 4px;
     text-align: center;
 }
 
