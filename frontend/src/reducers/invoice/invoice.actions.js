@@ -17,6 +17,16 @@ export function fetchInvoicesByDate(startDate, endDate) {
 }
 //Gets all invoices for a given date range
 
+export function fetchSingleInvoice(id) {
+    return dispatch => {
+        http.fetchAll("invoice/" + id)
+            .then((invoices) => {
+                dispatch(setInvoices(invoices));
+            });
+    }
+}
+//Gets single invoice by id
+
 export function addInvoice(invoice, dates, callback) {
     invoice = prepInvoiceValues(invoice);
     return dispatch => {

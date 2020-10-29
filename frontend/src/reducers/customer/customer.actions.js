@@ -15,7 +15,17 @@ export function fetchCustomers() {
             });
     }
 }
-//Gets all customers for a given date range
+//Gets all customers
+
+export function fetchSingleCustomer(id) {
+    return dispatch => {
+        http.fetchById("customer/" + id)
+            .then((customers) => {
+                dispatch(setCustomers(customers));
+            });
+    }
+}
+//Gets single customer by id
 
 export function fetchCustomerGroups() {
     return dispatch => {
@@ -25,7 +35,7 @@ export function fetchCustomerGroups() {
             });
     }
 }
-//Gets all customers for a given date range
+//Gets all customer groups
 
 export function addCustomer(customer, callback) {
     customer = prepCustomerValues(customer);

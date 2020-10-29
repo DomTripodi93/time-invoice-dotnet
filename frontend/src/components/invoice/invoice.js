@@ -4,6 +4,7 @@ import { deleteInvoice } from '../../reducers/invoice/invoice.actions';
 import { connect } from 'react-redux';
 import edit from '../../shared/assets/Edit.png';
 import trash from '../../shared/assets/Trash.png';
+import show from '../../shared/assets/Show.png';
 import helpers from '../../shared/helpers';
 
 const SingleInvoice = props => {
@@ -35,7 +36,7 @@ const SingleInvoice = props => {
                         }
                     </div>
                     <div className="inner-border-left">
-                        <h5>{helper.dateForDisplayWithDOW(props.invoice.date)}</h5>
+                        <h5>{helper.dateForDisplay(props.invoice.date)}</h5>
                     </div>
                     <div className="inner-border-left">
                         {props.invoice.customer ?
@@ -66,9 +67,10 @@ const SingleInvoice = props => {
                         }
                     </div>
                     {!props.change ?
-                        <div className="grid50 inner-border-right">
+                        <div className="grid33 inner-border-right">
                             <img alt="edit" className="icon" src={edit} onClick={setEditMode}/>
                             <img alt="delete" className="icon" src={trash} onClick={handleDelete}/>
+                            <img alt="show" className="icon" src={show} onClick={()=>{}}/>
                         </div>
                         :
                         null

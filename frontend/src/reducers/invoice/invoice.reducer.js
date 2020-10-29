@@ -1,7 +1,8 @@
 import InvoiceActionTypes from './invoice.types';
 
 const INITIAL_STATE = {
-    invoices: []
+    invoices: [],
+    selectedInvoice: {}
 }
 
 const invoiceReducer = (state = INITIAL_STATE, action) => {
@@ -33,6 +34,11 @@ const invoiceReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 invoices: invoicesHold
             };
+        case InvoiceActionTypes.SET_SELECTED_INVOICE:
+            return {
+                ...state,
+                selectedInvoice: action.payload
+            };
         case InvoiceActionTypes.DELETE_INVOICE:
             invoicesHold = [
                 ...invoicesHold
@@ -45,7 +51,8 @@ const invoiceReducer = (state = INITIAL_STATE, action) => {
             };
         case InvoiceActionTypes.SIGNOUT_USER:
             return {
-                invoices: []
+                invoices: [],
+                selectedInvoice: {}
             };
         default:
             return state;

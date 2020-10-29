@@ -2,7 +2,8 @@ import CustomerActionTypes from './customer.types';
 
 const INITIAL_STATE = {
     customers: [],
-    customerGroups: []
+    customerGroups: [],
+    selectedCustomer: {}
 }
 
 const customerReducer = (state = INITIAL_STATE, action) => {
@@ -36,6 +37,11 @@ const customerReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 customers: customersHold
             };
+        case CustomerActionTypes.SELECT_SELECTED_CUSTOMERS:
+            return {
+                ...state,
+                selectedCustomer: action.payload
+            };
         case CustomerActionTypes.DELETE_CUSTOMER:
             customersHold = [
                 ...customersHold
@@ -48,7 +54,9 @@ const customerReducer = (state = INITIAL_STATE, action) => {
             };
         case CustomerActionTypes.SIGNOUT_USER:
             return {
-                customers: []
+                customers: [],
+                customerGroups: [],
+                selectedCustomer: {}
             };
         default:
             return state;
