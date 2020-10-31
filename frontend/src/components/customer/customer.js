@@ -36,31 +36,27 @@ const SingleCustomer = props => {
                         {props.customer.pointOfContact ?
                             <h5>{props.customer.pointOfContact}</h5>
                             :
-                            null
+                            <h5 className="company-name">{props.customer.group}</h5>
                         }
                     </div>
                     <div className="inner-border-left">
                         {props.customer.defaultPhone ?
                             <h5>{props.customer.defaultPhone}</h5>
                             :
-                            null
+                            <h5></h5>
                         }
                     </div>
                     <div className="inner-border-left">
                         {props.customer.defaultEmail ?
                             <h5>{props.customer.defaultEmail}</h5>
                             :
-                            null
+                            <h5></h5>
                         }
                     </div>
-                    {!props.change ?
-                        <div className="grid50 inner-border-right">
-                            <img alt="edit" className="icon" src={edit} onClick={setEditMode}/>
-                            <img alt="delete" className="icon" src={trash} onClick={handleDelete}/>
-                        </div>
-                        :
-                        null
-                    }
+                    <div className="grid50 inner-border-right">
+                        <img alt="edit" className="icon" src={edit} onClick={setEditMode}/>
+                        <img alt="delete" className="icon" src={trash} onClick={handleDelete}/>
+                    </div>
                 </div>
                 :
                 <CustomerForm

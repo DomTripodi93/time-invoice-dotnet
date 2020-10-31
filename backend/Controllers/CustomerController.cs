@@ -76,11 +76,24 @@ namespace backend.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetCustomersInDateRange()
+        public async Task<IActionResult> GetCustomersForUser()
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             IEnumerable<Customer> customers = await _repo.GetCustomers(userId);
+
+            IEnumerable<CustomerForReturnDto> customersForReturn = _mapper.Map<IEnumerable<CustomerForReturnDto>>(customers);
+
+            return Ok(customersForReturn);
+        }
+
+
+        [HttpGet("group")]
+        public async Task<IActionResult> GetCustomerGroupsForUser()
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            IEnumerable<Customer> customers = await _repo.GetCustomerGroups(userId);
 
             IEnumerable<CustomerForReturnDto> customersForReturn = _mapper.Map<IEnumerable<CustomerForReturnDto>>(customers);
 

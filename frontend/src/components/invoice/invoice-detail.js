@@ -6,7 +6,7 @@ import helpers from '../../shared/helpers';
 
 const InvoiceDetail = props => {
     const helper = new helpers()
-    const total = props.invoice.hours * 0 //props.customer.rate //your rate here
+    const total = props.invoice.hours * 45 //props.customer.rate
 
     return (
         <div className="size-holder middle">
@@ -183,7 +183,7 @@ const InvoiceDetail = props => {
                             {props.customer.rate ?
                                 <h5>${props.customer.rate}</h5>
                                 :
-                                null
+                                <h5>$45</h5>
                             }
                         </div>
                         <div className="inner-border-right">

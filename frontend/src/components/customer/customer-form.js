@@ -133,7 +133,6 @@ const CustomerForm = props => {
                     name='address'
                     value={address}
                     onChange={handleChange}
-                    required
                 />
                 <FormInput
                     label='State'
@@ -141,7 +140,6 @@ const CustomerForm = props => {
                     name='state'
                     value={state}
                     onChange={handleChange}
-                    required
                 />
                 <FormInput
                     label='Zip Code'
@@ -149,7 +147,6 @@ const CustomerForm = props => {
                     name='zipCode'
                     value={zipCode}
                     onChange={handleChange}
-                    required
                 />
                 <FormInput
                     label='Phone Number'

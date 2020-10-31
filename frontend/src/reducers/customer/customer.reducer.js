@@ -8,6 +8,7 @@ const INITIAL_STATE = {
 
 const customerReducer = (state = INITIAL_STATE, action) => {
     let customersHold = [...state.customers]
+    let customerGroupsHold = [...state.customerGroups]
     switch (action.type) {
         case CustomerActionTypes.SET_CUSTOMERS:
             return {
@@ -15,11 +16,17 @@ const customerReducer = (state = INITIAL_STATE, action) => {
                 customers: action.payload.data
             };
         case CustomerActionTypes.SET_CUSTOMER_GROUPS:
+            if (action.payload.data.length === 0){
+                return state;
+            }
             return {
                 ...state,
                 customerGroups: action.payload.data
             };
         case CustomerActionTypes.ADD_OR_UPDATE_CUSTOMERS:
+            if (action.payload.isGroup){
+                customerGroupsHold = [...customerGroupsHold, action.payload]
+            }
             customersHold = [
                 action.payload,
                 ...customersHold
@@ -35,7 +42,8 @@ const customerReducer = (state = INITIAL_STATE, action) => {
                 })
             return {
                 ...state,
-                customers: customersHold
+                customers: customersHold,
+                customerGroups: customerGroupsHold
             };
         case CustomerActionTypes.SET_SELECTED_CUSTOMER:
             return {
