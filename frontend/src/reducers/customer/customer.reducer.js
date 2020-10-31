@@ -37,7 +37,7 @@ const customerReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 customers: customersHold
             };
-        case CustomerActionTypes.SELECT_SELECTED_CUSTOMERS:
+        case CustomerActionTypes.SET_SELECTED_CUSTOMER:
             return {
                 ...state,
                 selectedCustomer: action.payload

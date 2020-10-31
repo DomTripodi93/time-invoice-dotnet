@@ -50,7 +50,7 @@ namespace backend.Controllers
         }
 
 
-        [HttpGet("{id}", Name="GetCustomer")]
+        [HttpGet("byId/{id}", Name="GetCustomer")]
         public async Task<IActionResult> GetCustomer(int id)
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -62,22 +62,21 @@ namespace backend.Controllers
             return Ok(customerForReturn);
         }
 
-
-        [HttpGet("group")]
-        public async Task<IActionResult> GetCustomerGroups()
+        [HttpGet("{company}")]
+        public async Task<IActionResult> GetCustomerByCompany(string company)
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            
+            Customer customer = await _repo.GetSingleCustomerByCompany(userId, company);
 
-            IEnumerable<Customer> customers = await _repo.GetCustomerGroups(userId);
+            CustomerForReturnDto customerForReturn = _mapper.Map<CustomerForReturnDto>(customer);
 
-            IEnumerable<CustomerForReturnDto> customersForReturn = _mapper.Map<IEnumerable<CustomerForReturnDto>>(customers);
-
-            return Ok(customersForReturn);
+            return Ok(customerForReturn);
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> GetCustomers()
+        public async Task<IActionResult> GetCustomersInDateRange()
         {
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 

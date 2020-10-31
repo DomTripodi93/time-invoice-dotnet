@@ -17,11 +17,11 @@ export function fetchCustomers() {
 }
 //Gets all customers
 
-export function fetchSingleCustomer(id) {
+export function fetchSingleCustomer(company) {
     return dispatch => {
-        http.fetchById("customer/" + id)
+        http.fetchAll("customer/" + company)
             .then((customers) => {
-                dispatch(setCustomers(customers));
+                dispatch(setSingleCustomer(customers.data));
             });
     }
 }
@@ -85,6 +85,14 @@ export function addOrUpdateCustomerInState(customer) {
 export function setCustomers(customers) {
     return {
         type: CustomerActionTypes.SET_CUSTOMERS,
+        payload: customers
+    }
+}
+//Sets all customers in state
+
+export function setSingleCustomer(customers) {
+    return {
+        type: CustomerActionTypes.SET_SELECTED_CUSTOMER,
         payload: customers
     }
 }

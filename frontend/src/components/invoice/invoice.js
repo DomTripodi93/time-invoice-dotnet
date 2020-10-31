@@ -6,8 +6,11 @@ import edit from '../../shared/assets/Edit.png';
 import trash from '../../shared/assets/Trash.png';
 import show from '../../shared/assets/Show.png';
 import helpers from '../../shared/helpers';
+import { Link } from 'react-router-dom';
 
 const SingleInvoice = props => {
+    const invoiceDetailRoute = 'invoiceDetail/' + props.invoice.customer + "/" + props.invoice.id
+
     const helper = new helpers()
     const [editMode, updateEditMode] = useState(false);
     const setEditMode = () => {
@@ -70,7 +73,9 @@ const SingleInvoice = props => {
                         <div className="grid33 inner-border-right">
                             <img alt="edit" className="icon" src={edit} onClick={setEditMode}/>
                             <img alt="delete" className="icon" src={trash} onClick={handleDelete}/>
-                            <img alt="show" className="icon" src={show} onClick={()=>{}}/>
+                            <Link to={invoiceDetailRoute}  className="icon">
+                                <img alt="show" className="icon" src={show} onClick={()=>{}}/>
+                            </Link>
                         </div>
                         :
                         null

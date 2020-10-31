@@ -21,7 +21,7 @@ export function fetchSingleInvoice(id) {
     return dispatch => {
         http.fetchAll("invoice/" + id)
             .then((invoices) => {
-                dispatch(setInvoices(invoices));
+                dispatch(setSingleInvoice(invoices.data));
             });
     }
 }
@@ -78,6 +78,14 @@ export function addOrUpdateInvoiceInState(invoice) {
 export function setInvoices(invoices) {
     return {
         type: InvoiceActionTypes.SET_INVOICES,
+        payload: invoices
+    }
+}
+//Sets all invoices in state
+
+export function setSingleInvoice(invoices) {
+    return {
+        type: InvoiceActionTypes.SET_SELECTED_INVOICE,
         payload: invoices
     }
 }

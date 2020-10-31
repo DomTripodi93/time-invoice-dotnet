@@ -6,7 +6,6 @@ import './App.scss';
 import { checkUser } from './reducers/user/user.actions';
 import Header from './shared/header/header';
 import Loading from './shared/elements/loading/loading';
-import InvoiceContainer from './containers/invoice/invoice.container';
 
 
 const Home = lazy(() => import('./containers/home/home'));
@@ -17,6 +16,8 @@ const Signout = lazy(() => import('./containers/registration/signout'));
 const ClockItemContainer = lazy(() => import('./containers/clock-item/clockItem.container'));
 const SettingsContainer = lazy(() => import('./containers/settings/settings.container'));
 const CustomerContainer = lazy(() => import('./containers/customer/customer.container'));
+const InvoiceDetailContainer = lazy(() => import('./containers/invoice/invoice-detail.container'));
+const InvoiceContainer = lazy(() => import('./containers/invoice/invoice.container'));
 
 
 const App = (props) => {
@@ -42,6 +43,7 @@ const App = (props) => {
             <Route exact path='/invoice' component={InvoiceContainer} />
             <Route exact path='/settings' component={SettingsContainer} />
             <Route exact path='/customer' component={CustomerContainer} />
+            <Route exact path='/invoiceDetail/:customer/:invoiceId' component={InvoiceDetailContainer} />
             <Route exact path='/signout' component={Signout} />
           </Switch>
         </Suspense>

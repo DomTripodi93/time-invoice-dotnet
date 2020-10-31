@@ -60,5 +60,15 @@ namespace backend.Data
             
             return customer;
         }
+
+        public async Task<Customer> GetSingleCustomerByCompany(int userId, string company)
+        {
+            Customer customer = await _context.Customers
+                .Where(c => c.userId == userId)
+                .Where(c => c.CompanyName == company)
+                .FirstOrDefaultAsync();
+            
+            return customer;
+        }
     }
 }
