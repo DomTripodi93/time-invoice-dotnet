@@ -82,6 +82,13 @@ export const updateSettingsInState = (settings) => {
     };
 };
 
+export const updateLastInvoiceNumberInState = (lastInvoiceNumber) => {
+    return {
+        type: UserActionTypes.UPDATE_LAST_INVOICE_NUMBER,
+        lastInvoiceNumber
+    };
+};
+
 export const callTest = () => {
     http.fetchAll("test");
     return {

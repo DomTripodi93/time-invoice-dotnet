@@ -23,6 +23,7 @@ const ClockItemForm = props => {
     const [customerOptions, setCustomerOptions] = useState([{ value: "None", label: "None" }])
 
     const setUpCustomerOptions = useCallback(() => {
+        setCustomerOptions([{ value: "None", label: "None" }]);
         props.customers.forEach(customer => {
             setCustomerOptions((customers => {
                 return [...customers, {
@@ -39,6 +40,7 @@ const ClockItemForm = props => {
     useEffect(() => {
         let effectHelper = new helpers();
         if (props.editMode) {
+            setInvalidState(false);
             setClockItemInfo({
                 ...props.clockItemInput,
                 date: props.clockItemInput.date.split('T')[0],

@@ -42,7 +42,7 @@ namespace backend.Data
                 .Where(c => c.StartTime < endTime)
                 .ToListAsync();
             
-            return clockItems;
+            return clockItems.OrderBy(c => c.Date);
         }
 
         public async Task<IEnumerable<ClockItem>> GetClockItemsForPeriodAndInvoiced(DateTime startTime, DateTime endTime, Boolean invoiced, int userId)
@@ -54,7 +54,7 @@ namespace backend.Data
                 .Where(c => c.Invoiced == invoiced)
                 .ToListAsync();
             
-            return clockItems;
+            return clockItems.OrderBy(c => c.Date);
         }
 
         public async Task<ClockItem> GetSingleClockItem(int userId, int id)

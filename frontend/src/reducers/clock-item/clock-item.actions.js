@@ -9,7 +9,7 @@ const helper = new helpers();
 
 export function fetchClockItemsByDate(startDate, endDate) {
     return dispatch => {
-        http.fetchAll("clockItem/byDateRange/" + startDate + "/" + endDate)
+        http.fetchAll("clockItem/byDateRange/" + startDate + "/" + endDate+ "T23:59:59")
             .then((clockItems) => {
                 dispatch(setClockItems(clockItems));
             });

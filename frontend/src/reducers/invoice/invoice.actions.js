@@ -9,7 +9,7 @@ const helper = new helpers();
 
 export function fetchInvoicesByDate(startDate, endDate) {
     return dispatch => {
-        http.fetchAll("invoice/byDateRange/" + startDate + "/" + endDate)
+        http.fetchAll("invoice/byDateRange/" + startDate + "/" + endDate+ "T23:59:59")
             .then((invoices) => {
                 dispatch(setInvoices(invoices));
             });

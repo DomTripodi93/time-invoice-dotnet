@@ -8,6 +8,7 @@ const INITIAL_STATE = {
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
+    let settingsHold = {...state.settings}
     switch (action.type) {
         case UserActionTypes.SIGNIN_USER:
             return {
@@ -22,6 +23,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 settings: action.settings
             };
+        case UserActionTypes.UPDATE_LAST_INVOICE_NUMBER:
+            settingsHold.lastInvoiceNumber = action.lastInvoiceNumber
+            return {
+                ...state,
+                settings: settingsHold
+            }
         case UserActionTypes.SIGNOUT_USER:
             return {
                 userToken: null,
