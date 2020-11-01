@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { addInvoice, updateInvoice } from '../../reducers/invoice/invoice.actions';
-import { updateLastInvoiceNumberInState, updateSettings } from '../../reducers/user/user.actions';
+import { updateLastInvoiceNumberInState } from '../../reducers/user/user.actions';
 import CustomButton from '../../shared/elements/button/custom-button.component';
 import FormInput from '../../shared/elements/form-input/form-input.component';
 import helpers from '../../shared/helpers';
@@ -75,9 +75,9 @@ const InvoiceForm = props => {
     const handleInvoiceChange = event => {
         const { name, value } = event.target;
 
-        if (name === "customer" & value !== "None"){
+        if (name === "customer" & value !== "None") {
             setInvalidState(false);
-        } else if (name === "customer" & value === "None"){
+        } else if (name === "customer" & value === "None") {
             setInvalidState(true);
         }
 
@@ -86,12 +86,12 @@ const InvoiceForm = props => {
 
     const handleDateRangeChange = event => {
         const { name, value } = event.target;
-        if (name === "startDate"){
-            if (value < dateRage.endDate){
+        if (name === "startDate") {
+            if (value < dateRage.endDate) {
                 setDateRange({ ...dateRage, [name]: value });
             }
         } else {
-            if (value > dateRage.startDate){
+            if (value > dateRage.startDate) {
                 setDateRange({ ...dateRage, [name]: value });
             }
         }
